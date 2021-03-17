@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { v4 as uuidv4 } from "uuid";
 
 const Rating = ({ value, text, color }) => {
   return (
@@ -8,6 +9,7 @@ const Rating = ({ value, text, color }) => {
         {/* Star Logic, show number of stars depending on rating */}
         {[1, 2, 3, 4, 5].map((index) => (
           <i
+            key={uuidv4()}
             style={{ color }}
             className={
               value >= index

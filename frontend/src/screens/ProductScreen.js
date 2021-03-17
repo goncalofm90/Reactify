@@ -14,7 +14,7 @@ const ProductScreen = ({ match }) => {
     };
 
     fetchProduct();
-  }, []);
+  }, [match]);
   return (
     <>
       <Link className="btn btn-primary my-3" to="/">
