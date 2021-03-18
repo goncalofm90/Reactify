@@ -28,7 +28,7 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
         return {
           ...state,
           // return a new cardItems array with the previous products spread and add the new item
-          cartItems: [state.cartItems, item],
+          cartItems: [...state.cartItems, item],
         };
       }
 
