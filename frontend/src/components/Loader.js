@@ -3,19 +3,106 @@ import { Spinner } from "react-bootstrap";
 
 const Loader = () => {
   return (
-    <Spinner
-      animation="border"
-      variant="primary"
-      role="status"
-      style={{
-        width: "100px",
-        height: "100px",
-        margin: "auto",
-        display: "block",
-      }}
-    >
-      <span class="sr-only">loading...</span>
-    </Spinner>
+    <div style={{ width: "10%", margin: "auto" }}>
+      <Spinner
+        animation="grow"
+        variant="primary"
+        role="status"
+        style={{
+          width: "6px",
+          height: "6px",
+          margin: "2px",
+          padding: "2px",
+          display: "inline-block",
+        }}
+      ></Spinner>
+      <Spinner
+        animation="grow"
+        variant="primary"
+        role="status"
+        style={{
+          width: "6px",
+          height: "6px",
+          margin: "2px",
+          padding: "2px",
+          display: "inline-block",
+        }}
+      ></Spinner>
+      <Spinner
+        animation="grow"
+        variant="primary"
+        role="status"
+        style={{
+          width: "6px",
+          height: "6px",
+          margin: "2px",
+          padding: "2px",
+          display: "inline-block",
+        }}
+      ></Spinner>
+      <Spinner
+        animation="grow"
+        variant="primary"
+        role="status"
+        style={{
+          width: "6px",
+          height: "6px",
+          margin: "2px",
+          padding: "2px",
+          display: "inline-block",
+        }}
+      ></Spinner>
+      <Spinner
+        animation="grow"
+        variant="primary"
+        role="status"
+        style={{
+          width: "6px",
+          height: "6px",
+          margin: "2px",
+          padding: "2px",
+          display: "inline-block",
+        }}
+      ></Spinner>
+      <Spinner
+        animation="grow"
+        variant="primary"
+        role="status"
+        style={{
+          width: "6px",
+          height: "6px",
+          margin: "2px",
+          padding: "2px",
+          display: "inline-block",
+        }}
+      ></Spinner>
+      <Spinner
+        animation="grow"
+        variant="primary"
+        role="status"
+        style={{
+          width: "6px",
+          height: "6px",
+          margin: "2px",
+          padding: "2px",
+          display: "inline-block",
+        }}
+      ></Spinner>
+      <Spinner
+        animation="grow"
+        variant="primary"
+        role="status"
+        style={{
+          width: "6px",
+          height: "6px",
+          margin: "2px",
+          padding: "2px",
+          display: "inline-block",
+        }}
+      >
+        <span class="sr-only">loading...</span>
+      </Spinner>
+    </div>
   );
 };
 
