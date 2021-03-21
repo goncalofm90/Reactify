@@ -3,7 +3,11 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { getUserDetails } from "../actions/userActions";
+import {
+  getUserDetails,
+  updateUserProfile,
+  userUpdateProfile,
+} from "../actions/userActions";
 
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState("");
@@ -18,6 +22,9 @@ const ProfileScreen = ({ location, history }) => {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
+  const { success } = userUpdateProfile;
 
   useEffect(() => {
     if (!userInfo) {
@@ -37,7 +44,7 @@ const ProfileScreen = ({ location, history }) => {
     if (password !== confirmPassword) {
       setMessage("Passwords do not match!");
     } else {
-      //dispatch update profile
+      dispatch(updateUserProfile({ id: user._id, name, email, password }));
     }
   };
 
@@ -47,6 +54,7 @@ const ProfileScreen = ({ location, history }) => {
         <h2>Profile</h2>
         {message && <Message variant="primary">{message}</Message>}
         {error && <Message variant="primary">{error}</Message>}
+        {success && <Message variant="success">Profile updated.</Message>}
         {loading ? (
           <Loader />
         ) : (

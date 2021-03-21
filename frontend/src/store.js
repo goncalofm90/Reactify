@@ -9,9 +9,11 @@ import {
   userLoginReducer,
   userRegisterReducer,
   userDetailsReducer,
+  userUpdateProfileReducer,
 } from "./reducers/userReducers";
 import { cartReducer } from "./reducers/cartReducers";
 
+//all the reducers
 const reducer = combineReducers({
   productList: productListReducer,
   productDetails: productDetailsReducer,
@@ -19,19 +21,31 @@ const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
+  userUpdateProfile: userUpdateProfileReducer,
 });
 
-//get Cart items and put them in DB
+//get data and put it in DB
 const cartItemsFromStorage = localStorage.getItem("cartItems")
-  ? JSON.parse(localStorage.getItem("cartItems"))
-  : [];
+  ? //If there are items in the DB, parse and return them
+    JSON.parse(localStorage.getItem("cartItems"))
+  : //otherwise, return an empty array/object depending on the type of data
+    [];
 
+//userInfo
 const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))
   : null;
 
+//shipping address
+const shippingAddressFromStorage = localStorage.getItem("shippingAddress")
+  ? JSON.parse(localStorage.getItem("shippingAddress"))
+  : {};
+
 const initialState = {
-  cart: { cartItems: cartItemsFromStorage },
+  cart: {
+    cartItems: cartItemsFromStorage,
+    shippingAddress: shippingAddressFromStorage,
+  },
   userLogin: { userInfo: userInfoFromStorage },
 };
 const middleware = [thunk];
