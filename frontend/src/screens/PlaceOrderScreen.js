@@ -1,22 +1,43 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { Row, Col, ListGroup, Image, Card, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import CheckoutSteps from "../components/CheckoutSteps";
+import { createOrder } from "../actions/orderActions";
 
-const PlaceOrderScreen = () => {
+const PlaceOrderScreen = ({ history }) => {
+  const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+  const orderCreate = useSelector((state) => state.orderCreate);
+  const { order, success, error } = orderCreate;
+
+  useEffect(() => {
+    if (success) {
+      history.push(`/order/${order._id}`);
+    }
+  }, [history, success, order]);
 
   const placeOrderHandler = () => {
-    console.log("ordered");
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        shippingPrice: cart.shippingPrice,
+        taxPrice: cart.taxPrice,
+        totalPrice: cart.totalPrice,
+      })
+    );
   };
 
   //The following method allows the showing of 2 decimals even if the last number is 0
   const addDecimals = (num) => {
     return (Math.round(num * 100) / 100).toFixed(2);
   };
+
+  cart.paymentMethod = "paypal";
 
   //Price calculations
   cart.itemsPrice = addDecimals(
@@ -114,6 +135,9 @@ const PlaceOrderScreen = () => {
                   <Col>Total</Col>
                   <Col>€ {cart.totalPrice}</Col>
                 </Row>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                {error && <Message variant="primary">{error}</Message>}
               </ListGroup.Item>
               <ListGroup.Item>
                 <Button
