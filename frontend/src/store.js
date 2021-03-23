@@ -5,7 +5,10 @@ import {
   productListReducer,
   productDetailsReducer,
 } from "./reducers/productReducers";
-import { orderCreateReducer } from "./reducers/orderReducers";
+import {
+  orderCreateReducer,
+  orderDetailsReducer,
+} from "./reducers/orderReducers";
 import {
   userLoginReducer,
   userRegisterReducer,
@@ -24,6 +27,7 @@ const reducer = combineReducers({
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
   orderCreate: orderCreateReducer,
+  orderDetails: orderDetailsReducer,
 });
 
 //get data and put it in DB
