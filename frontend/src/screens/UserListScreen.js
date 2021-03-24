@@ -38,7 +38,7 @@ const UserListScreen = ({ history }) => {
       {loading ? (
         <Loader />
       ) : error ? (
-        <Message variant="danger">{error}</Message>
+        <Message variant="primary">{error}</Message>
       ) : (
         <Table striped bordered hover responsive className="table-sm">
           <thead>
@@ -60,9 +60,23 @@ const UserListScreen = ({ history }) => {
                 </td>
                 <td>
                   {user.isAdmin ? (
-                    <i className="fas fa-check" style={{ color: "green" }}></i>
+                    <i
+                      className="fas fa-check"
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        color: "green",
+                      }}
+                    ></i>
                   ) : (
-                    <i className="fas fa-times" style={{ color: "red" }}></i>
+                    <i
+                      className="fas fa-times"
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        color: "red",
+                      }}
+                    ></i>
                   )}
                 </td>
                 <td>
