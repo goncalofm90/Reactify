@@ -84,13 +84,18 @@ const UserListScreen = ({ history }) => {
                     style={{ display: "flex", justifyContent: "space-around" }}
                   >
                     <LinkContainer to={`/admin/user/${user._id}/edit`}>
-                      <Button variant="secondary" className="btn-sm">
+                      <Button
+                        disabled={userInfo._id === user._id}
+                        variant="secondary"
+                        className="btn-sm"
+                      >
                         <i className="fas fa-edit"></i>
                       </Button>
                     </LinkContainer>
                     <Button
                       variant="primary"
                       className="btn-sm"
+                      disabled={userInfo._id === user._id}
                       onClick={() => deleteHandler(user._id)}
                     >
                       <i className="fas fa-trash"></i>
