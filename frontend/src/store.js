@@ -13,6 +13,7 @@ import {
   orderDetailsReducer,
   orderPayReducer,
   orderListMyReducer,
+  orderListReducer,
 } from "./reducers/orderReducers";
 import {
   userLoginReducer,
@@ -45,6 +46,7 @@ const reducer = combineReducers({
   orderPay: orderPayReducer,
   //user order listing
   orderListMy: orderListMyReducer,
+  orderList: orderListReducer,
 });
 
 //get data and put it in DB
