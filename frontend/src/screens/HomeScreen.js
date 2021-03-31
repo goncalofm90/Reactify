@@ -6,6 +6,7 @@ import { listProducts } from "../actions/productActions";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import Paginate from "../components/Paginate";
+import ProductCarousel from "../components/ProductCarousel";
 
 const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword;
@@ -19,9 +20,10 @@ const HomeScreen = ({ match }) => {
 
   return (
     <>
+      {!keyword && <ProductCarousel />}
       <h1>Latest Products</h1>
       {loading ? (
-        <Loader></Loader>
+        <Loader />
       ) : error ? (
         <Message variant="primary">{error}</Message>
       ) : (
@@ -44,7 +46,7 @@ const HomeScreen = ({ match }) => {
             pages={pages}
             page={page}
             keyword={keyword ? keyword : ""}
-          ></Paginate>
+          />
         </>
       )}
     </>
