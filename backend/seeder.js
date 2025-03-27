@@ -7,9 +7,20 @@ import User from "./models/userModel.js";
 import Product from "./models/productModel.js";
 import Order from "./models/orderModel.js";
 import connectDB from "./config/db.js";
+import path from "path";
+import { fileURLToPath } from "url";
 
-dotenv.config();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load .env manually from the root folder
+dotenv.config({ path: path.resolve(__dirname, "../.env") });
+
+console.log("MONGO_URI from .env:", process.env.MONGO_URI); // Debug
+
+// dotenv.config();
 connectDB();
+console.log("MONGO_URI from .env:", process.env.MONGO_URI); // Debugging step
 
 const importData = async () => {
   try {
