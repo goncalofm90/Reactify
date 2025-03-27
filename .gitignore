@@ -9,3 +9,8 @@ backend/node_modules/
 # Ignore production build
 /frontend/build
 /backend/build
+
+#Ignore package lock files
+package-lock.json
+frontend/package-lock.json
+backend/package-lock.json
