@@ -6,7 +6,6 @@
   "type": "module",
   "scripts": {
     "start": "node backend/server",
-    "build": "npm run build --prefix frontend",
     "server": "nodemon backend/server",
     "client": "CHOKIDAR_USEPOLLING=true npm start --prefix frontend",
     "dev": "CHOKIDAR_USEPOLLING=true concurrently \"npm run server\" \"npm run client\"",
@@ -22,6 +21,9 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/goncalofm90/ReactShop/issues"
+  },
+  "engines": {
+    "node": "14.x"
   },
   "homepage": "https://github.com/goncalofm90/ReactShop#readme",
   "dependencies": {
@@ -39,9 +41,8 @@
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
     "nodemon": "^2.0.7",
-    "postcss": "^8.4.31",
+    "postcss": "^8.5.3",
     "postcss-safe-parser": "^7.0.1",
-    "react-scripts": "^5.0.1",
     "rimraf": "^6.0.1",
     "uuid": "^11.1.0"
   }
