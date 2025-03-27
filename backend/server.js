@@ -1,6 +1,7 @@
 import path from "path";
 import express from "express";
 import dotenv from "dotenv";
+import colors from "colors";
 import cors from 'cors';
 import morgan from "morgan";
 import connectDB from "./config/db.js";
@@ -24,7 +25,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 app.use(express.json());
-
+colors.enable();
 app.use(
   cors({
     origin: 'https://reactify-ecru.vercel.app/', 
