@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node backend/server",
+    "build": "npm run build --prefix frontend",
     "server": "nodemon backend/server",
     "client": "CHOKIDAR_USEPOLLING=true npm start --prefix frontend",
     "dev": "CHOKIDAR_USEPOLLING=true concurrently \"npm run server\" \"npm run client\"",
