@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Row, Col, Table } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
+import { Link, useNavigate  } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
@@ -8,7 +8,7 @@ import { getUserDetails, updateUserProfile } from "../actions/userActions";
 import { listMyOrders } from "../actions/orderActions";
 import { USER_UPDATE_PROFILE_RESET } from "../constants/userConstants";
 
-const ProfileScreen = ({ location, history }) => {
+const ProfileScreen = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,9 +28,11 @@ const ProfileScreen = ({ location, history }) => {
   const orderListMy = useSelector((state) => state.orderListMy);
   const { loading: loadingOrders, error: errorOrders, orders } = orderListMy;
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (!userInfo) {
-      history.push("/login");
+      navigate("/login");
     } else {
       if (!user || !user.name || success) {
         dispatch({ type: USER_UPDATE_PROFILE_RESET });
@@ -41,7 +43,7 @@ const ProfileScreen = ({ location, history }) => {
         setEmail(user.email);
       }
     }
-  }, [history, userInfo, dispatch, user, success]);
+  }, [userInfo, dispatch, user, success, navigate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -144,14 +146,14 @@ const ProfileScreen = ({ location, history }) => {
                     )}
                   </td>
                   <td>
-                    <LinkContainer
+                    <Link
                       style={{ display: "flex", justifyContent: "center" }}
                       to={`/order/${order._id}`}
                     >
                       <Button className="btn-sm" variant="primary">
                         Order details
                       </Button>
-                    </LinkContainer>
+                    </Link>
                   </td>
                 </tr>
               ))}

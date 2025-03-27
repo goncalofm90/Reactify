@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom"; // Import useNavigate and useParams
 import { useDispatch, useSelector } from "react-redux";
 import {
   Row,
@@ -20,11 +20,13 @@ import Message from "../components/Message";
 import Meta from "../components/Meta";
 import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
 
-const ProductScreen = ({ history, match }) => {
+const ProductScreen = () => {
   const [qty, setQty] = useState(1);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // Hook for navigation
+  const { id } = useParams(); // Hook to get the product ID from the URL
 
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
@@ -45,17 +47,17 @@ const ProductScreen = ({ history, match }) => {
       setComment("");
       dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
     }
-    dispatch(listProductDetails(match.params.id));
-  }, [dispatch, match, successProductReview]);
+    dispatch(listProductDetails(id)); // Use id from useParams
+  }, [dispatch, id, successProductReview]);
 
   const addToCartHandler = () => {
-    history.push(`/cart/${match.params.id}?qty=${qty}`);
+    navigate(`/cart/${id}?qty=${qty}`); // Use navigate instead of history.push
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(
-      createProductReview(match.params.id, {
+      createProductReview(id, {
         rating,
         comment,
       })

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";  // useParams and useNavigate for v6
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
@@ -11,8 +11,9 @@ import FormContainer from "../components/FormContainer";
 import { PRODUCT_UPDATE_RESET } from "../constants/productConstants";
 import { PRODUCT_DETAILS_RESET } from "../constants/productConstants";
 
-const ProductEditScreen = ({ match, history }) => {
-  const productId = match.params.id;
+const ProductEditScreen = () => {
+  const { id: productId } = useParams();  // useParams to get productId
+  const navigate = useNavigate();  // useNavigate for programmatic navigation
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
@@ -32,7 +33,7 @@ const ProductEditScreen = ({ match, history }) => {
   const {
     loading: loadingUpdate,
     error: errorUpdate,
-    succes: successUpdate,
+    success: successUpdate,
   } = productUpdate;
 
   const userLogin = useSelector((state) => state.userLogin);
@@ -42,7 +43,7 @@ const ProductEditScreen = ({ match, history }) => {
     if (successUpdate) {
       dispatch({ type: PRODUCT_UPDATE_RESET });
       dispatch({ type: PRODUCT_DETAILS_RESET });
-      history.push("/admin/productlist");
+      navigate("/admin/productlist");  // Use navigate for redirect
     } else {
       if (!product.name || product._id !== productId) {
         dispatch(listProductDetails(productId));
@@ -56,7 +57,7 @@ const ProductEditScreen = ({ match, history }) => {
         setDescription(product.description);
       }
     }
-  }, [dispatch, history, productId, product, successUpdate]);
+  }, [dispatch, navigate, productId, product, successUpdate]);
 
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];

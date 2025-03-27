@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";  // useParams and useNavigate for v6
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
@@ -8,14 +8,19 @@ import { getUserDetails, updateUser } from "../actions/userActions";
 import FormContainer from "../components/FormContainer";
 import { USER_UPDATE_RESET } from "../constants/userConstants";
 
-const UserEditScreen = ({ match, history }) => {
-  const userId = match.params.id;
+const UserEditScreen = () => {
+  const { id: userId } = useParams();  // useParams to get userId
+  const navigate = useNavigate();  // useNavigate for programmatic navigation
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
+
   const dispatch = useDispatch();
+
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
+
   const userUpdate = useSelector((state) => state.userUpdate);
   const {
     loading: loadingUpdate,
@@ -26,7 +31,7 @@ const UserEditScreen = ({ match, history }) => {
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: USER_UPDATE_RESET });
-      history.push("/admin/userlist");
+      navigate("/admin/userlist");  // Use navigate for redirect
     } else {
       if (!user.name || user._id !== userId) {
         dispatch(getUserDetails(userId));
@@ -36,7 +41,7 @@ const UserEditScreen = ({ match, history }) => {
         setIsAdmin(user.isAdmin);
       }
     }
-  }, [user, dispatch, history, userId, successUpdate]);
+  }, [dispatch, userId, user, successUpdate, navigate]);
 
   const submitHandler = (e) => {
     e.preventDefault();

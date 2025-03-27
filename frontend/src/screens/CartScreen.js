@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom'
+import { useParams, useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import { addToCart, removeFromCart } from "../actions/cartActions";
@@ -13,14 +14,13 @@ import {
   Card,
 } from "react-bootstrap";
 
-const CartScreen = ({ match, location, history }) => {
-  const productId = match.params.id;
+const CartScreen = () => {
+  const { id: productId } = useParams()
+  const location = useLocation()
+  const navigate = useNavigate()
   const qty = location.search ? Number(location.search.split("=")[1]) : 1;
-
   const dispatch = useDispatch();
-
   const cart = useSelector((state) => state.cart);
-
   const { cartItems } = cart;
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const CartScreen = ({ match, location, history }) => {
   };
 
   const checkoutHandler = () => {
-    history.push("/login?redirect=shipping");
+    navigate("/login?redirect=shipping");
   };
 
   return (
@@ -67,13 +67,13 @@ const CartScreen = ({ match, location, history }) => {
                       style={{ margin: "0.5rem 0" }}
                       value={item.qty}
                       onChange={(e) => {
-                        history.push(
+                        navigate(
                           `/cart/${item.product}?qty=${e.target.value}`
                         );
                         dispatch(
                           addToCart(item.product, Number(e.target.value))
                         );
-                        history.push("/cart");
+                        navigate("/cart");
                       }}
                     >
                       {[...Array(item.countInStock).keys()].map((x) => (
