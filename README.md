@@ -48,6 +48,9 @@ PORT=5000
 
 ## Running the Application
 
+## Seeding the Database
+To populate the database with initial test data, run the following command:
+
 ### Start the Development Server
 ```bash
 npm run dev
