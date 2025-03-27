@@ -25,6 +25,13 @@ if (process.env.NODE_ENV === "development") {
 
 app.use(express.json());
 
+app.use(
+  cors({
+    origin: 'https://reactify-ecru.vercel.app/', 
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  })
+);
+
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
