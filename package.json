@@ -41,6 +41,7 @@
     "nodemon": "^2.0.7",
     "postcss": "^8.4.31",
     "postcss-safe-parser": "^7.0.1",
+    "react-scripts": "^5.0.1",
     "rimraf": "^6.0.1",
     "uuid": "^11.1.0"
   }
